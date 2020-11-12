@@ -26,7 +26,7 @@ import java.util.concurrent.locks.StampedLock;
 
 *       读写  读获取stamp 写修改了stamp 验证stamp时失败 升级读锁。
 * */
-public class Test3 {
+public class TestStampedLock {
     public static void main(String[] args) throws InterruptedException {
         DataContainerStamped dataContainerStamped = new DataContainerStamped(1);
         new Thread(() -> {

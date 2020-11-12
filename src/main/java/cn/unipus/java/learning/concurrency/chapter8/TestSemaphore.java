@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /*
 *   Semaphore信号量，用来限制能同时访问共享资源的线程上限。
 * */
-public class Test4 {
+public class TestSemaphore {
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(3);
 
