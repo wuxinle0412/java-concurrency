@@ -5,10 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Test3 {
+/**
+ *   测试原子引用类
+ * */
+
+public class TestAtomicReference {
     public static void main(String[] args) {
-        DecimalAccountCas account = new DecimalAccountCas(new BigDecimal("10000"));
-        DecimalAccount.demo(account);
+        //线程不安全的实现
+        DecimalAccountUnsafe acc1 = new DecimalAccountUnsafe(new BigDecimal("10000"));
+        //线程安全的实现
+        DecimalAccountCas acc2 = new DecimalAccountCas(new BigDecimal("10000"));
+        DecimalAccount.demo(acc1);
+        DecimalAccount.demo(acc2);
+    }
+}
+
+class DecimalAccountUnsafe implements DecimalAccount {
+    private BigDecimal decimal;
+
+    public DecimalAccountUnsafe(BigDecimal decimal) {
+        this.decimal = decimal;
+    }
+
+
+    @Override
+    public BigDecimal getBalance() {
+        return this.decimal;
+    }
+
+    @Override
+    public void withdraw(BigDecimal amount) {
+        BigDecimal newBigDecimal = getBalance();
+        this.decimal = newBigDecimal.subtract(amount);
     }
 }
 
